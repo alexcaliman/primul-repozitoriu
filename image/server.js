@@ -1,11 +1,15 @@
 var http = require('http');
-
+var startTime;
+var host;
 var handleRequest = function(request, response) {
-  console.log('Am primit o interogare pe URL: ' + request.url);
+  response.setHeader('Content-Type', 'text/plain');
   response.writeHead(200);
-	response.write("Este versiunea 2.Aplicatia se executa pe podul >>");
-	response.write(host);
-  response.end('| v2 \n');
-};
+  response.write("Este versiunea II! | Aplicatia se executa pe :");
+  response.write(host);
+  response.end(" v=2\n");
+  console.log("Running On:" , host);
+}
 var www = http.createServer(handleRequest);
-www.listen(8080);
+www.listen(8080,function () {
+    host = process.env.HOSTNAME;
+})
